@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Notes</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="source_code"><a href="https://github.com/sabharwalAayush2509/Notes">Source Code</a></string>
+    <string name="your_notes">Your notes</string>
+    <string name="enter_a_note">Enter a note</string>
+    <string name="add_note">Add note</string>
 </resources>
