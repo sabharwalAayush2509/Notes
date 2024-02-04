@@ -27,7 +27,8 @@
         android:layout_marginTop="6dp"
         android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toTopOf="@+id/enter_a_note"
-        app:layout_constraintTop_toBottomOf="@+id/your_notes" />
+        app:layout_constraintTop_toBottomOf="@+id/your_notes"
+        tools:listitem="@layout/item_note" />
 
     <EditText
         android:id="@+id/enter_a_note"
