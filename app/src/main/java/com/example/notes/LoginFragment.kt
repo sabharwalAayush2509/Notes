@@ -8,8 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.notes.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.Task
 class LoginFragment : Fragment() {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var binding: FragmentLoginBinding
     private val RC_SIGN_IN = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,33 +30,31 @@ class LoginFragment : Fragment() {
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
-        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val signInButton = view.findViewById<SignInButton>(R.id.sign_in_button)
-        signInButton.setSize(SignInButton.SIZE_WIDE)
-        val sourceCode = view.findViewById<TextView>(R.id.source_code)
+    ): View {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        signInButton.setOnClickListener {
+        binding.signInButton.setSize(SignInButton.SIZE_WIDE)
+        binding.signInButton.setOnClickListener {
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        sourceCode.setOnClickListener {
-            sourceCode.movementMethod = LinkMovementMethod.getInstance()
+        binding.sourceCode.setOnClickListener {
+            binding.sourceCode.movementMethod = LinkMovementMethod.getInstance()
         }
 
-        return view
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
 
-        val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
+        val account = GoogleSignIn.getLastSignedInAccount(requireContext())
         updateUI(account)
     }
 
@@ -77,6 +77,7 @@ class LoginFragment : Fragment() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
 
+            Toast.makeText(requireContext(), "You're signed in", Toast.LENGTH_SHORT).show()
             updateUI(account)
         } catch (e: ApiException) {
             Log.d("message", "signInResult:failed code=${e.statusCode}")
