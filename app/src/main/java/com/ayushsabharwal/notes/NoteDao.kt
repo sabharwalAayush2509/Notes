@@ -1,4 +1,4 @@
-package com.example.notes
+package com.ayushsabharwal.notes
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

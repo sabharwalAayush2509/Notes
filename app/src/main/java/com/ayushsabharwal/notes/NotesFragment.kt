@@ -1,5 +1,6 @@
-package com.example.notes
+package com.ayushsabharwal.notes
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.notes.databinding.FragmentNotesBinding
+import com.ayushsabharwal.notes.databinding.FragmentNotesBinding
 
 class NotesFragment : Fragment(), NotesAdapterInterface {
 
@@ -24,10 +25,9 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
         binding.recyclerView.adapter = adapter
 
         viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+            this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
         )[NoteViewModel::class.java]
-        viewModel.allNotes.observe(requireActivity()) { list ->
+        viewModel.allNotes.observe(viewLifecycleOwner) { list ->
             list?.let {
                 adapter.updateList(it)
             }
@@ -37,6 +37,7 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             val noteText = binding.enterANote.text.toString()
             if (noteText.isNotEmpty()) {
                 viewModel.insertNote(Note(noteText))
+                binding.enterANote.setText("")
             }
         }
 

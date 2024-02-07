@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.notes'
+    namespace 'com.ayushsabharwal.notes'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.notes"
+        applicationId "com.ayushsabharwal.notes"
         minSdk 27
         targetSdk 34
         versionCode 1

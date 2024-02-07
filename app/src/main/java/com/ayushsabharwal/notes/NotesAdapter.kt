@@ -1,4 +1,4 @@
-package com.example.notes
+package com.ayushsabharwal.notes
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
     private val allNotes = ArrayList<Note>()
 
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.text)
+        val text: TextView = itemView.findViewById(R.id.text)
         val outlineDeleteForever24: ImageView =
             itemView.findViewById(R.id.outline_delete_forever_24)
     }
@@ -34,7 +34,7 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote = allNotes[position]
-        holder.textView.text = currentNote.text
+        holder.text.text = currentNote.text
     }
 
     fun updateList(newList: List<Note>) {
