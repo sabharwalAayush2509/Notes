@@ -35,7 +35,6 @@
         android:fontFamily="@font/open_sans_regular"
         android:text="@string/source_code"
         android:textSize="15sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
