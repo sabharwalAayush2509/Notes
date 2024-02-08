@@ -37,8 +37,11 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             val noteText = binding.enterANote.text.toString()
             if (noteText.isNotEmpty()) {
                 viewModel.insertNote(Note(noteText))
-                binding.enterANote.setText("")
             }
+        }
+
+        binding.removeNote.setOnClickListener {
+            binding.enterANote.setText("")
         }
 
         return binding.root

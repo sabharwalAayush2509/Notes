@@ -19,7 +19,6 @@
         android:fontFamily="@font/open_sans_regular"
         android:padding="12dp"
         android:textColor="@color/white"
-        android:textIsSelectable="true"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

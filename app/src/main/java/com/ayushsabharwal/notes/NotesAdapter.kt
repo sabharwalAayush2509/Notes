@@ -35,6 +35,12 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote = allNotes[position]
         holder.text.text = currentNote.text
+        holder.text.fixTextSelection()
+    }
+
+    private fun TextView.fixTextSelection() {
+        setTextIsSelectable(false)
+        post { setTextIsSelectable(true) }
     }
 
     fun updateList(newList: List<Note>) {

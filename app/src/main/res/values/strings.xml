@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Notes</string>
     <string name="source_code"><a href="https://github.com/sabharwalAayush2509/Notes">Source Code</a></string>
+    <string name="developer_name">from\nAyush Sabharwal</string>
     <string name="your_notes">Your notes</string>
     <string name="enter_a_note">Enter a note</string>
     <string name="add_note">Add note</string>
+    <string name="remove_note">Remove note</string>
 </resources>
