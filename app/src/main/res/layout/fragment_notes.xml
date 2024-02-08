@@ -16,19 +16,27 @@
         android:fontFamily="@font/open_sans_regular"
         android:text="@string/your_notes"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        app:layout_constraintBottom_toTopOf="@+id/swipe_refresh_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="4.5dp"
         android:layout_marginBottom="4.5dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/enter_a_note"
-        app:layout_constraintTop_toBottomOf="@+id/your_notes"
-        tools:listitem="@layout/item_note" />
+        app:layout_constraintTop_toBottomOf="@+id/your_notes">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_note" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <EditText
         android:id="@+id/enter_a_note"
@@ -44,7 +52,7 @@
         android:maxLines="6"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/add_note"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+        app:layout_constraintTop_toBottomOf="@+id/swipe_refresh_layout" />
 
     <Button
         android:id="@+id/add_note"

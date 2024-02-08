@@ -82,4 +82,7 @@ dependencies {
 
     // Google login API
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
+    // Swipe refresh layout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

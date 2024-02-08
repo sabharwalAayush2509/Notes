@@ -33,6 +33,15 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             }
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.allNotes.observe(viewLifecycleOwner) { list ->
+                list?.let {
+                    adapter.updateList(it)
+                }
+            }
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         binding.addNote.setOnClickListener {
             val noteText = binding.enterANote.text.toString()
             if (noteText.isNotEmpty()) {
