@@ -75,8 +75,8 @@ class LoginFragment : Fragment() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
 
-            Toast.makeText(requireContext(), "You're signed in", Toast.LENGTH_SHORT).show()
             updateUI(account)
+            Toast.makeText(requireContext(), "You're signed in", Toast.LENGTH_SHORT).show()
         } catch (e: ApiException) {
             Log.d("message", "signInResult:failed code=${e.statusCode}")
             updateUI(null)
