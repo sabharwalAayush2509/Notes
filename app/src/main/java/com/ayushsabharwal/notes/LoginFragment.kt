@@ -44,9 +44,7 @@ class LoginFragment : Fragment() {
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
 
-        binding.sourceCode.setOnClickListener {
-            binding.sourceCode.movementMethod = LinkMovementMethod.getInstance()
-        }
+        binding.sourceCode.movementMethod = LinkMovementMethod.getInstance()
 
         return binding.root
     }
