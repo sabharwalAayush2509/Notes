@@ -27,9 +27,9 @@
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/open_sans_regular"
         android:text="@string/sign_out"
-        app:layout_constraintBottom_toBottomOf="@+id/your_notes"
+        app:layout_constraintBottom_toTopOf="@+id/swipe_refresh_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/your_notes" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"

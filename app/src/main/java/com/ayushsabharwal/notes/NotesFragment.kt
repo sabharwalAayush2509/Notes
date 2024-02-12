@@ -19,7 +19,8 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
 
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentNotesBinding
-    lateinit var viewModel: NoteViewModel
+    private lateinit var viewModel: NoteViewModel
+    private lateinit var currentNote: Note
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +66,13 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
 
         binding.addNote.setOnClickListener {
             val noteText = binding.enterANote.text.toString().trim()
-            if (noteText.isNotEmpty()) {
+            val buttonText = binding.addNote.text
+            if (noteText.isNotEmpty() && buttonText == "Add note") {
                 viewModel.insertNote(Note(noteText))
+            } else if (noteText.isNotEmpty() && buttonText == "Save note") {
+                currentNote.text = noteText
+                viewModel.updateNote(currentNote)
+                binding.addNote.text = "Add note"
             }
         }
 
@@ -78,6 +84,12 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
     }
 
     override fun onItemClicked(note: Note) {
+        currentNote = note
+        binding.enterANote.setText(note.text)
+        binding.addNote.text = "Save note"
+    }
+
+    override fun onItemClicked2(note: Note) {
         viewModel.deleteNote(note)
     }
 }

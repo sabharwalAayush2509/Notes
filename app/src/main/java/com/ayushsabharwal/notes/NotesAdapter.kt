@@ -15,6 +15,7 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
 
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val text: TextView = itemView.findViewById(R.id.text)
+        val outlineEdit24: ImageView = itemView.findViewById(R.id.outline_edit_24)
         val outlineDeleteForever24: ImageView =
             itemView.findViewById(R.id.outline_delete_forever_24)
     }
@@ -22,8 +23,11 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val viewHolder =
             NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.item_note, parent, false))
-        viewHolder.outlineDeleteForever24.setOnClickListener {
+        viewHolder.outlineEdit24.setOnClickListener {
             listener.onItemClicked(allNotes[viewHolder.adapterPosition])
+        }
+        viewHolder.outlineDeleteForever24.setOnClickListener {
+            listener.onItemClicked2(allNotes[viewHolder.adapterPosition])
         }
         return viewHolder
     }
@@ -53,4 +57,5 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
 
 interface NotesAdapterInterface {
     fun onItemClicked(note: Note)
+    fun onItemClicked2(note: Note)
 }
