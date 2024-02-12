@@ -28,6 +28,9 @@ class LoginFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val account = GoogleSignIn.getLastSignedInAccount(requireContext())
+        updateUI(account)
+
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
@@ -49,13 +52,6 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        val account = GoogleSignIn.getLastSignedInAccount(requireContext())
-        updateUI(account)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -74,7 +70,6 @@ class LoginFragment : Fragment() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-
             updateUI(account)
             Toast.makeText(requireContext(), "You're signed in", Toast.LENGTH_SHORT).show()
         } catch (e: ApiException) {

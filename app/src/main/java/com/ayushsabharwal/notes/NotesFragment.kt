@@ -6,14 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ayushsabharwal.notes.databinding.FragmentNotesBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class NotesFragment : Fragment(), NotesAdapterInterface {
 
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentNotesBinding
     lateinit var viewModel: NoteViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -33,6 +47,13 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             }
         }
 
+        binding.signOut.setOnClickListener {
+            mGoogleSignInClient.signOut().addOnCompleteListener {
+                findNavController().navigate(R.id.action_notesFragment_to_loginFragment)
+                Toast.makeText(requireContext(), "You're signed out", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.allNotes.observe(viewLifecycleOwner) { list ->
                 list?.let {
@@ -43,13 +64,13 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
         }
 
         binding.addNote.setOnClickListener {
-            val noteText = binding.enterANote.text.toString()
+            val noteText = binding.enterANote.text.toString().trim()
             if (noteText.isNotEmpty()) {
                 viewModel.insertNote(Note(noteText))
             }
         }
 
-        binding.removeNote.setOnClickListener {
+        binding.clearNote.setOnClickListener {
             binding.enterANote.setText("")
         }
 

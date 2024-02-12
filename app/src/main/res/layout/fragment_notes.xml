@@ -20,6 +20,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/sign_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="@font/open_sans_regular"
+        android:text="@string/sign_out"
+        app:layout_constraintBottom_toBottomOf="@+id/your_notes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/your_notes" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
@@ -55,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/swipe_refresh_layout" />
 
     <Button
-        android:id="@+id/remove_note"
+        android:id="@+id/clear_note"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -63,7 +74,7 @@
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/open_sans_regular"
-        android:text="@string/remove_note"
+        android:text="@string/clear_note"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/add_note"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,14 +85,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="3dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
         android:fontFamily="@font/open_sans_regular"
         android:text="@string/add_note"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/clear_note"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/remove_note"
-        app:layout_constraintTop_toBottomOf="@+id/enter_a_note" />
+        app:layout_constraintStart_toEndOf="@+id/clear_note"
+        app:layout_constraintTop_toTopOf="@+id/clear_note" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
