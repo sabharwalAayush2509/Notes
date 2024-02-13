@@ -4,7 +4,9 @@
     <string name="developer_name">from\nAyush Sabharwal</string>
     <string name="your_notes">Your notes</string>
     <string name="sign_out">Sign out</string>
+    <string name="no_notes_to_display">No \uD83D\uDCDD to display</string>
     <string name="enter_a_note">Enter a note</string>
     <string name="clear_note">Clear note</string>
     <string name="add_note">Add note</string>
+    <string name="save_note">Save note</string>
 </resources>

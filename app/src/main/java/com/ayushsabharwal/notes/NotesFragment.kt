@@ -21,6 +21,8 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NoteViewModel
     private lateinit var currentNote: Note
+    private lateinit var addNote: String
+    private lateinit var saveNote: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,9 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+
+        addNote = getString(R.string.add_note)
+        saveNote = getString(R.string.save_note)
     }
 
     override fun onCreateView(
@@ -67,12 +72,12 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
         binding.addNote.setOnClickListener {
             val noteText = binding.enterANote.text.toString().trim()
             val buttonText = binding.addNote.text
-            if (noteText.isNotEmpty() && buttonText == "Add note") {
+            if (noteText.isNotEmpty() && buttonText == addNote) {
                 viewModel.insertNote(Note(noteText))
-            } else if (noteText.isNotEmpty() && buttonText == "Save note") {
+            } else if (noteText.isNotEmpty() && buttonText == saveNote) {
                 currentNote.text = noteText
                 viewModel.updateNote(currentNote)
-                binding.addNote.text = "Add note"
+                binding.addNote.text = addNote
             }
         }
 
@@ -83,10 +88,18 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
         return binding.root
     }
 
+    override fun onDataChanged(isEmpty: Boolean) {
+        if (isEmpty) {
+            binding.noNotesToDisplay.visibility = View.VISIBLE
+        } else {
+            binding.noNotesToDisplay.visibility = View.GONE
+        }
+    }
+
     override fun onItemClicked(note: Note) {
         currentNote = note
         binding.enterANote.setText(note.text)
-        binding.addNote.text = "Save note"
+        binding.addNote.text = saveNote
     }
 
     override fun onItemClicked2(note: Note) {

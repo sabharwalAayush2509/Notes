@@ -50,12 +50,13 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
     fun updateList(newList: List<Note>) {
         allNotes.clear()
         allNotes.addAll(newList)
-
         notifyDataSetChanged()
+        listener.onDataChanged(allNotes.isEmpty())
     }
 }
 
 interface NotesAdapterInterface {
+    fun onDataChanged(isEmpty: Boolean)
     fun onItemClicked(note: Note)
     fun onItemClicked2(note: Note)
 }
