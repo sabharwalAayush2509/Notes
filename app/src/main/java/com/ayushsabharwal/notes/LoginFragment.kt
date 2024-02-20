@@ -30,6 +30,14 @@ class LoginFragment : Fragment() {
 
         val account = GoogleSignIn.getLastSignedInAccount(requireContext())
         updateUI(account)
+        account?.let {
+            val personDisplayName = account.displayName
+            Toast.makeText(
+                requireContext(),
+                "Welcome Back! \uD83C\uDF89 $personDisplayName",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
@@ -71,7 +79,12 @@ class LoginFragment : Fragment() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             updateUI(account)
-            Toast.makeText(requireContext(), "You're signed in", Toast.LENGTH_SHORT).show()
+            account?.let {
+                val personDisplayName = account.displayName
+                Toast.makeText(
+                    requireContext(), "Hello! \uD83D\uDC4B $personDisplayName", Toast.LENGTH_SHORT
+                ).show()
+            }
         } catch (e: ApiException) {
             Log.d("message", "signInResult:failed code=${e.statusCode}")
             updateUI(null)

@@ -20,16 +20,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/sign_out"
+    <ImageView
+        android:id="@+id/outline_person_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:background="@drawable/note_background"
+        android:padding="6dp"
+        android:src="@drawable/outline_person_24"
+        app:layout_constraintBottom_toBottomOf="@+id/your_notes"
+        app:layout_constraintEnd_toStartOf="@+id/outline_logout_24"
+        app:layout_constraintTop_toTopOf="@+id/your_notes" />
+
+    <ImageView
+        android:id="@+id/outline_logout_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:fontFamily="@font/open_sans_regular"
-        android:text="@string/sign_out"
-        app:layout_constraintBottom_toTopOf="@+id/swipe_refresh_layout"
+        android:background="@drawable/note_background"
+        android:padding="6dp"
+        android:src="@drawable/outline_logout_24"
+        app:layout_constraintBottom_toBottomOf="@+id/outline_person_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/outline_person_24" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
@@ -83,7 +96,7 @@
         android:inputType="textMultiLine"
         android:maxLines="6"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/add_note"
+        app:layout_constraintBottom_toTopOf="@+id/clear_note"
         app:layout_constraintTop_toBottomOf="@+id/swipe_refresh_layout" />
 
     <Button
@@ -94,21 +107,22 @@
         android:layout_marginTop="3dp"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/clear_color"
         android:fontFamily="@font/open_sans_regular"
         android:text="@string/clear_note"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_note"
+        app:layout_constraintEnd_toStartOf="@+id/create_note"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_a_note" />
 
     <Button
-        android:id="@+id/add_note"
+        android:id="@+id/create_note"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/open_sans_regular"
-        android:text="@string/add_note"
+        android:text="@string/create_note"
         app:layout_constraintBottom_toBottomOf="@id/clear_note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/clear_note"

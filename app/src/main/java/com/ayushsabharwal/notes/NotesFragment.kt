@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +20,7 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NoteViewModel
     private lateinit var currentNote: Note
-    private lateinit var addNote: String
+    private lateinit var createNote: String
     private lateinit var saveNote: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +30,7 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        addNote = getString(R.string.add_note)
+        createNote = getString(R.string.create_note)
         saveNote = getString(R.string.save_note)
     }
 
@@ -53,10 +52,13 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             }
         }
 
-        binding.signOut.setOnClickListener {
+        binding.outlinePerson24.setOnClickListener {
+            findNavController().navigate(R.id.action_notesFragment_to_personFragment)
+        }
+
+        binding.outlineLogout24.setOnClickListener {
             mGoogleSignInClient.signOut().addOnCompleteListener {
                 findNavController().navigate(R.id.action_notesFragment_to_loginFragment)
-                Toast.makeText(requireContext(), "You're signed out", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -69,15 +71,15 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             binding.swipeRefreshLayout.isRefreshing = false
         }
 
-        binding.addNote.setOnClickListener {
+        binding.createNote.setOnClickListener {
             val noteText = binding.enterANote.text.toString().trim()
-            val buttonText = binding.addNote.text
-            if (noteText.isNotEmpty() && buttonText == addNote) {
+            val buttonText = binding.createNote.text
+            if (noteText.isNotEmpty() && buttonText == createNote) {
                 viewModel.insertNote(Note(noteText))
             } else if (noteText.isNotEmpty() && buttonText == saveNote) {
                 currentNote.text = noteText
                 viewModel.updateNote(currentNote)
-                binding.addNote.text = addNote
+                binding.createNote.text = createNote
             }
         }
 
@@ -99,7 +101,7 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
     override fun onItemClicked(note: Note) {
         currentNote = note
         binding.enterANote.setText(note.text)
-        binding.addNote.text = saveNote
+        binding.createNote.text = saveNote
     }
 
     override fun onItemClicked2(note: Note) {

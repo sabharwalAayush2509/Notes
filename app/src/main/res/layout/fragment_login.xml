@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/app_logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="60dp"
+        android:elevation="12dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,17 +26,17 @@
         android:text="@string/app_name"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/app_logo"
+        app:layout_constraintStart_toStartOf="@id/app_logo"
         app:layout_constraintTop_toBottomOf="@+id/app_logo" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="@id/app_name"
+        app:layout_constraintStart_toStartOf="@id/app_name"
         app:layout_constraintTop_toBottomOf="@+id/app_name" />
 
     <TextView
@@ -46,9 +47,11 @@
         android:fontFamily="@font/open_sans_regular"
         android:text="@string/developer_name"
         android:textAlignment="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/source_code"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/source_code"
+        app:layout_constraintStart_toStartOf="@id/source_code" />
 
     <TextView
         android:id="@+id/source_code"

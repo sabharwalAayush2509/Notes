@@ -27,6 +27,23 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/notesFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_notesFragment_to_personFragment"
+            app:destination="@id/personFragment"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.ayushsabharwal.notes.PersonFragment"
+        android:label="fragment_person"
+        tools:layout="@layout/fragment_person">
+        <action
+            android:id="@+id/action_personFragment_to_notesFragment"
+            app:destination="@id/notesFragment"
+            app:popUpTo="@id/personFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>
