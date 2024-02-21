@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:background="@drawable/note_background"
+        android:background="@drawable/app_background"
         android:padding="6dp"
         android:src="@drawable/outline_close_24"
         app:layout_constraintBottom_toBottomOf="@+id/your_details"
@@ -32,11 +32,11 @@
 
     <ImageView
         android:id="@+id/personPhoto"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="30dp"
-        android:background="@color/note_background_color"
-        android:elevation="12dp"
+        android:background="@drawable/app_background_3"
+        android:elevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/your_details"
@@ -50,11 +50,12 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/open_sans_regular"
+        android:textAlignment="center"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personPhoto"
-        tools:text="Name - Ayush Sabharwal" />
+        tools:text="Ayush Sabharwal" />
 
     <TextView
         android:id="@+id/personEmail"
@@ -62,52 +63,58 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/open_sans_regular"
+        android:textAlignment="center"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@id/person_name"
         app:layout_constraintStart_toStartOf="@id/person_name"
         app:layout_constraintTop_toBottomOf="@+id/person_name"
-        tools:text="Email - ayushbusinesses29@gmail.com" />
+        tools:text="ayushbusinesses29@gmail.com" />
 
     <TextView
         android:id="@+id/notes_created"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/open_sans_regular"
+        android:textAlignment="center"
         android:textColor="@color/app_color"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/personEmail"
-        app:layout_constraintStart_toStartOf="@id/personEmail"
-        app:layout_constraintTop_toBottomOf="@+id/personEmail"
-        tools:text="Notes created - 25" />
+        app:layout_constraintBottom_toTopOf="@+id/notes_edited"
+        app:layout_constraintEnd_toEndOf="@+id/notes_edited"
+        app:layout_constraintStart_toStartOf="@+id/notes_edited"
+        tools:text="Notes created: 25" />
 
     <TextView
         android:id="@+id/notes_edited"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/open_sans_regular"
-        android:textColor="@color/note_background_color"
+        android:textAlignment="center"
+        android:textColor="@color/app_color_2"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/notes_created"
-        app:layout_constraintStart_toStartOf="@id/notes_created"
-        app:layout_constraintTop_toBottomOf="@+id/notes_created"
-        tools:text="Notes edited - 25" />
+        app:layout_constraintBottom_toTopOf="@+id/notes_deleted"
+        app:layout_constraintEnd_toEndOf="@+id/notes_deleted"
+        app:layout_constraintStart_toStartOf="@+id/notes_deleted"
+        tools:text="Notes edited: 25" />
 
     <TextView
         android:id="@+id/notes_deleted"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="60dp"
         android:fontFamily="@font/open_sans_regular"
-        android:textColor="@color/clear_color"
+        android:textAlignment="center"
+        android:textColor="@color/app_color_3"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/notes_edited"
-        app:layout_constraintStart_toStartOf="@+id/notes_edited"
-        app:layout_constraintTop_toBottomOf="@+id/notes_edited"
-        tools:text="Notes deleted - 25" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Notes deleted: 25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

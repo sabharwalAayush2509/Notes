@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ayushsabharwal.notes.databinding.FragmentPersonBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
@@ -34,15 +35,15 @@ class PersonFragment : Fragment() {
 
             Glide.with(this).load(personPhoto)
                 .apply(RequestOptions().placeholder(R.drawable.outline_person_24))
-                .into(binding.personPhoto)
+                .transition(DrawableTransitionOptions.withCrossFade()).into(binding.personPhoto)
             binding.personName.text =
                 getString(R.string.person_name, personGivenName, personFamilyName)
-            binding.personEmail.text = getString(R.string.person_email, personEmail)
+            binding.personEmail.text = personEmail
         }
 
-        binding.notesCreated.text = "Notes created - 25"
-        binding.notesEdited.text = "Notes edited - 25"
-        binding.notesDeleted.text = "Notes deleted - 25"
+        binding.notesCreated.text = "Notes created: 25"
+        binding.notesEdited.text = "Notes edited: 25"
+        binding.notesDeleted.text = "Notes deleted: 25"
 
         return binding.root
     }
