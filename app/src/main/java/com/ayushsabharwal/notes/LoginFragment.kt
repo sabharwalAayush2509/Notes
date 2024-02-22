@@ -1,6 +1,9 @@
 package com.ayushsabharwal.notes
 
+import android.app.Application
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.util.Log
@@ -9,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ayushsabharwal.notes.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,12 +25,17 @@ import com.google.android.gms.tasks.Task
 
 class LoginFragment : Fragment() {
 
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var viewModel: NoteViewModel
     private val RC_SIGN_IN = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedPreferences =
+            requireContext().getSharedPreferences(KEY_NOTES_PREFERENCES, Context.MODE_PRIVATE)
 
         val account = GoogleSignIn.getLastSignedInAccount(requireContext())
         updateUI(account)
@@ -48,6 +57,10 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        viewModel = ViewModelProvider(
+            this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
+        )[NoteViewModel::class.java]
 
         binding.signInButton.setSize(SignInButton.SIZE_WIDE)
         binding.signInButton.setOnClickListener {
@@ -80,7 +93,16 @@ class LoginFragment : Fragment() {
             val account = completedTask.getResult(ApiException::class.java)
             updateUI(account)
             account?.let {
+                val personId = account.id
                 val personDisplayName = account.displayName
+
+                if (sharedPreferences.getString(KEY_NOTES_Id, "") != personId) {
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.putString(KEY_NOTES_Id, personId)
+                    editor.apply()
+                    viewModel.deleteAllNotes()
+                }
                 Toast.makeText(
                     requireContext(), "Hello! \uD83D\uDC4B $personDisplayName", Toast.LENGTH_SHORT
                 ).show()
