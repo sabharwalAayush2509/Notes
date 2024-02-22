@@ -1,6 +1,8 @@
 package com.ayushsabharwal.notes
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,15 +18,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class NotesFragment : Fragment(), NotesAdapterInterface {
 
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var createNote: String
+    private lateinit var saveNote: String
     private lateinit var binding: FragmentNotesBinding
     private lateinit var viewModel: NoteViewModel
     private lateinit var currentNote: Note
-    private lateinit var createNote: String
-    private lateinit var saveNote: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedPreferences =
+            requireContext().getSharedPreferences(KEY_NOTES_PREFERENCES, Context.MODE_PRIVATE)
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
@@ -76,9 +82,11 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
             val buttonText = binding.createNote.text
             if (noteText.isNotEmpty() && buttonText == createNote) {
                 viewModel.insertNote(Note(noteText))
+                saveNotesDetails(KEY_NOTES_CREATED)
             } else if (noteText.isNotEmpty() && buttonText == saveNote) {
                 currentNote.text = noteText
                 viewModel.updateNote(currentNote)
+                saveNotesDetails(KEY_NOTES_EDITED)
                 binding.createNote.text = createNote
             }
         }
@@ -106,5 +114,34 @@ class NotesFragment : Fragment(), NotesAdapterInterface {
 
     override fun onItemClicked2(note: Note) {
         viewModel.deleteNote(note)
+        saveNotesDetails(KEY_NOTES_DELETED)
+    }
+
+    private fun saveNotesDetails(key: String) {
+        when (key) {
+            KEY_NOTES_CREATED -> {
+                var notesCreated = sharedPreferences.getInt(KEY_NOTES_CREATED, 0)
+                ++notesCreated
+                val editor = sharedPreferences.edit()
+                editor.putInt(KEY_NOTES_CREATED, notesCreated)
+                editor.apply()
+            }
+
+            KEY_NOTES_EDITED -> {
+                var notesEdited = sharedPreferences.getInt(KEY_NOTES_EDITED, 0)
+                ++notesEdited
+                val editor = sharedPreferences.edit()
+                editor.putInt(KEY_NOTES_EDITED, notesEdited)
+                editor.apply()
+            }
+
+            KEY_NOTES_DELETED -> {
+                var notesDeleted = sharedPreferences.getInt(KEY_NOTES_DELETED, 0)
+                ++notesDeleted
+                val editor = sharedPreferences.edit()
+                editor.putInt(KEY_NOTES_DELETED, notesDeleted)
+                editor.apply()
+            }
+        }
     }
 }
