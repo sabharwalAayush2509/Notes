@@ -16,9 +16,7 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.delete(note)
     }
 
-    val getAllNotes: LiveData<List<Note>> = noteDao.getAllNotes()
-
-    suspend fun deleteAllNotes() {
-        noteDao.deleteAllNotes()
+    fun getAllNotesByUserId(userId: String): LiveData<List<Note>> {
+        return noteDao.getAllNotesByUserId(userId)
     }
 }

@@ -16,7 +16,6 @@ ext {
     lifecycleVersion = '2.7.0'
     materialVersion = '1.11.0'
     roomVersion = '2.6.1'
-    // testing
     junitVersion = '4.13.2'
     espressoVersion = '3.4.0'
     androidxJunitVersion = '1.1.5'

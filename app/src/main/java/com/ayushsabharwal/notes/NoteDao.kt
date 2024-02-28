@@ -20,9 +20,6 @@ interface NoteDao {
     @Delete
     suspend fun delete(note: Note)
 
-    @Query("Select * from notes_table order by id DESC")
-    fun getAllNotes(): LiveData<List<Note>>
-
-    @Query("Delete from notes_table")
-    suspend fun deleteAllNotes()
+    @Query("SELECT * FROM notes_table WHERE userId = :userId ORDER BY id DESC")
+    fun getAllNotesByUserId(userId: String): LiveData<List<Note>>
 }

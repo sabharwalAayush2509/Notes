@@ -1,6 +1,5 @@
 package com.ayushsabharwal.notes
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -12,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.ayushsabharwal.notes.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -25,25 +23,22 @@ import com.google.android.gms.tasks.Task
 
 class LoginFragment : Fragment() {
 
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: NoteViewModel
     private val RC_SIGN_IN = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        sharedPreferences =
-            requireContext().getSharedPreferences(KEY_NOTES_PREFERENCES, Context.MODE_PRIVATE)
-
         val account = GoogleSignIn.getLastSignedInAccount(requireContext())
-        updateUI(account)
         account?.let {
             val personDisplayName = account.displayName
+
+            updateUI()
             Toast.makeText(
                 requireContext(),
-                "Welcome Back! \uD83C\uDF89 $personDisplayName",
+                "Welcome Back! $personDisplayName \uD83C\uDF89",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -51,16 +46,15 @@ class LoginFragment : Fragment() {
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         mGoogleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+
+        sharedPreferences =
+            requireContext().getSharedPreferences(KEY_NOTES_PREFERENCES, Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-
-        viewModel = ViewModelProvider(
-            this, ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
-        )[NoteViewModel::class.java]
 
         binding.signInButton.setSize(SignInButton.SIZE_WIDE)
         binding.signInButton.setOnClickListener {
@@ -82,34 +76,29 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun updateUI(account: GoogleSignInAccount?) {
-        if (account != null) {
-            findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
-        }
+    private fun updateUI() {
+        findNavController().navigate(R.id.action_loginFragment_to_notesFragment)
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            updateUI(account)
             account?.let {
                 val personId = account.id
                 val personDisplayName = account.displayName
 
-                if (sharedPreferences.getString(KEY_NOTES_Id, "") != personId) {
+                if (sharedPreferences.getString(KEY_USER_ID, "") != personId) {
                     val editor = sharedPreferences.edit()
-                    editor.clear()
-                    editor.putString(KEY_NOTES_Id, personId)
+                    editor.putString(KEY_USER_ID, personId)
                     editor.apply()
-                    viewModel.deleteAllNotes()
                 }
+                updateUI()
                 Toast.makeText(
-                    requireContext(), "Hello! \uD83D\uDC4B $personDisplayName", Toast.LENGTH_SHORT
+                    requireContext(), "Hello! $personDisplayName \uD83D\uDC4B", Toast.LENGTH_SHORT
                 ).show()
             }
         } catch (e: ApiException) {
             Log.d("message", "signInResult:failed code=${e.statusCode}")
-            updateUI(null)
         }
     }
 }

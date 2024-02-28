@@ -23,13 +23,13 @@
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes">
         <action
-            android:id="@+id/action_notesFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_notesFragment_to_personFragment"
+            app:destination="@id/personFragment"
             app:popUpTo="@id/notesFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_notesFragment_to_personFragment"
-            app:destination="@id/personFragment"
+            android:id="@+id/action_notesFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
             app:popUpTo="@id/notesFragment"
             app:popUpToInclusive="true" />
     </fragment>

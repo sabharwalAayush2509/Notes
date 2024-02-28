@@ -1,9 +1,8 @@
 package com.ayushsabharwal.notes
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,15 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class PersonFragment : Fragment() {
 
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentPersonBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        sharedPreferences =
-            requireContext().getSharedPreferences(KEY_NOTES_PREFERENCES, Context.MODE_PRIVATE)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -51,13 +42,7 @@ class PersonFragment : Fragment() {
             binding.personEmail.text = personEmail
         }
 
-        val notesCreated = sharedPreferences.getInt(KEY_NOTES_CREATED, 0)
-        val notesEdited = sharedPreferences.getInt(KEY_NOTES_EDITED, 0)
-        val notesDeleted = sharedPreferences.getInt(KEY_NOTES_DELETED, 0)
-
-        binding.notesCreated.text = getString(R.string.notes_created, notesCreated)
-        binding.notesEdited.text = getString(R.string.noted_edited, notesEdited)
-        binding.notesDeleted.text = getString(R.string.notes_deleted, notesDeleted)
+        binding.privacyPolicy.movementMethod = LinkMovementMethod.getInstance()
 
         return binding.root
     }
