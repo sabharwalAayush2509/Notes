@@ -60,6 +60,7 @@
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/open_sans_regular"
         android:text="@string/source_code"
+        android:textColor="@color/app_color"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

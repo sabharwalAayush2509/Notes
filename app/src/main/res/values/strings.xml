@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Notes</string>
-    <string name="source_code"><a href="https://github.com/sabharwalAayush2509/Notes">Source Code</a></string>
+    <string name="source_code"><u>Source Code</u></string>
     <string name="developer_name">from\nAyush Sabharwal</string>
     <string name="your_notes">Your notes</string>
     <string name="no_notes_to_display">No \uD83D\uDCDD to display</string>
@@ -10,5 +10,6 @@
     <string name="save_note">Save note</string>
     <string name="your_details">Your details</string>
     <string name="person_name">%s %s</string>
-    <string name="privacy_policy"><a href="https://www.google.co.in/">Privacy Policy</a></string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+    <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
 </resources>

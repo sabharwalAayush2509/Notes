@@ -2,11 +2,12 @@ package com.ayushsabharwal.notes
 
 import android.net.Uri
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.ayushsabharwal.notes.databinding.FragmentPersonBinding
 import com.bumptech.glide.Glide
@@ -42,7 +43,29 @@ class PersonFragment : Fragment() {
             binding.personEmail.text = personEmail
         }
 
-        binding.privacyPolicy.movementMethod = LinkMovementMethod.getInstance()
+        binding.privacyPolicy.setOnClickListener {
+            val url = "https://sites.google.com/view/notes-privacy-policy-/home"
+            val customTabsBuilder = CustomTabsIntent.Builder()
+            customTabsBuilder.setToolbarColor(
+                ContextCompat.getColor(
+                    requireContext(), R.color.app_color
+                )
+            )
+            val intent = customTabsBuilder.build()
+            intent.launchUrl(requireContext(), Uri.parse(url))
+        }
+
+        binding.termsAndConditions.setOnClickListener {
+            val url = "https://sites.google.com/view/notes-terms-and-conditions/home"
+            val customTabsBuilder = CustomTabsIntent.Builder()
+            customTabsBuilder.setToolbarColor(
+                ContextCompat.getColor(
+                    requireContext(), R.color.app_color
+                )
+            )
+            val intent = customTabsBuilder.build()
+            intent.launchUrl(requireContext(), Uri.parse(url))
+        }
 
         return binding.root
     }
