@@ -12,4 +12,10 @@
     <string name="person_name">%s %s</string>
     <string name="privacy_policy"><u>Privacy Policy</u></string>
     <string name="terms_and_conditions"><u>Terms and Conditions</u></string>
+    <string name="app_icon">App Icon</string>
+    <string name="person">Person</string>
+    <string name="logout">Logout</string>
+    <string name="edit">Edit</string>
+    <string name="delete_forever">Delete Forever</string>
+    <string name="close">Close</string>
 </resources>

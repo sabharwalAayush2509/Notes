@@ -50,8 +50,8 @@ class NotesAdapter(private val context: Context, private val listener: NotesAdap
     fun updateList(newList: List<Note>) {
         allNotes.clear()
         allNotes.addAll(newList)
-        notifyDataSetChanged()
         listener.onDataChanged(allNotes.isEmpty())
+        notifyDataSetChanged()
     }
 }
 
